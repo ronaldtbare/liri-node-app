@@ -1,6 +1,13 @@
 # liri-node-app
+
+by Travis Bare
+
+
 Liri is a node.js siri clone that has 3 options pulling from 3 apis.
 The app takes in command-line parameters for songs, bands and movies and returns the relevant data.
+
+#Technology
+Node, JavaScript, momentjs, several apis
 
 This app uses the Spotify API, BandsInTown API, and the OMDB API.
 
