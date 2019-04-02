@@ -5,3 +5,10 @@ The app takes in command-line parameters for songs, bands and movies and returns
 This app uses the Spotify API, BandsInTown API, and the OMDB API.
 
 To run Liri, you must use the following commands: 'spotify-this', 'concert-this', 'movie-this', or 'do-this'.
+
+Screenshots:
+
+![spotify](spotify.png);
+![spotify](movie-this.png);
+
+

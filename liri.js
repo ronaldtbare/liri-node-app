@@ -6,6 +6,7 @@ var Spotify = require('node-spotify-api');
 require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require('axios');
+var moment = require('moment');
 
 //user data
 var command = process.argv[2];
@@ -27,8 +28,9 @@ function concertThis(){
       axios.get(queryURL)
         .then(function (response) {
           console.log(hline);
-          console.log(response);
-         
+          console.log("Name of Venue: " + response.data[0].venue.name);
+          console.log("Venue Location: " + response.data[0].venue.city);
+          console.log("Date odf Event: " + moment(response.data[0].datetime).format("MM-DD-YYYY"));
           console.log(hline);
         
         })
@@ -46,12 +48,7 @@ function spotifyThis(){
     // A preview link of the song from Spotify
     // The album that the song is from
     // If no song is provided then your program will default to "The Sign" by Ace of Base.
-    // You will utilize the node-spotify-api package in order to retrieve song information from the Spotify API.
-    // The Spotify API requires you sign up as a developer to generate the necessary credentials. You can follow these steps in order to generate a client id and client secret:
-    // Step One: Visit https://developer.spotify.com/my-applications/#!/
-    // Step Two: Either login to your existing Spotify account or create a new one (a free account is fine) and log in.
-    // Step Three: Once logged in, navigate to https://developer.spotify.com/my-applications/#!/applications/create to register a new application to be used with the Spotify API. You can fill in whatever you'd like for these fields. When finished, click the "complete" button.
-    // Step Four: On the next screen, scroll down to where you see your client id and client secret. Copy these values down somewhere, you'll need them to use the Spotify API and the node-spotify-api package.
+    
     
     if (!searchVariable){searchVariable="the sign ace of base"}
 
@@ -63,17 +60,17 @@ function spotifyThis(){
       });
    
       spotify
-        .search({ type: 'track', query: searchVariable, limit: 1 }, function (error,response)
+        .search({ type: 'track', query: searchVariable, limit: 1 }, function (error,data)
         {
           if (error){
             return console.log("An error occurred. "+ error);
           }
-        
-          var spotifyArray = response.tracks.items;
-          console.log(spotifyArray);
-          // console.log("This testy " +searchVariable+JSON.stringify(response,null,2));
-          // console.log(response.tracks.items[0].album.artist[0].name);
-          // console.log(response.tracks.items.album.artists);
+          
+          console.log("Artist(s) Name: " + data.tracks.items[0].album.artists[0].name);
+          console.log("Song Name: "+ data.tracks.items[0].name);
+          console.log("Song Preview Link: "+data.tracks.items[0].href);
+          console.log("Album: "+ data.tracks.items[0].album.name);
+          
         })
         
 }
@@ -107,7 +104,7 @@ function movieThis(){
           console.log("Plot: "+response.data.Plot);
           console.log("Actors: "+response.data.Actors);
           console.log(hline);
-          
+
         })
         .catch(function (error) {
           console.log("Try again."+error);
@@ -124,12 +121,11 @@ function doThis() {
       {
 
         if(error){return console.log(error)}
+        console.log(data);
+        var randomData = data.split(",");
+         command = randomData[0];
 
-        var dataArray=data.split(",");
-          command = dataArray[0];
-          searchVariable = dataArray[1];
-
-          main(command,searchVariable);
+          main(command);
       })
 }
  
