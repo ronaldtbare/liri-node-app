@@ -8,7 +8,7 @@ To run Liri, you must use the following commands: 'spotify-this', 'concert-this'
 
 Screenshots:
 
-![GitHub Logo](spotify.png);
-![GitHub Logo](movie-this.png);
+![spofity](spotify.PNG);
+![Movie](movie-this.PNG);
 
 
