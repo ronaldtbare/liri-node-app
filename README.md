@@ -17,5 +17,7 @@ Screenshots:
 
 ![spofity](spotify.PNG);
 ![Movie](movie-this.PNG);
+![concert-this](concert-this.PNG);
+![do-this](do-this.PNG);
 
 

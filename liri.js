@@ -24,13 +24,13 @@ function concertThis(){
       // Date of the Event (use moment to format this as "MM/DD/YYYY")
       console.log(searchVariable);
       
-     var queryURL = "https://rest.bandsintown./artists/"+searchVariable+ "/events?app_id=codingbootcamp"
+     var queryURL = "https://rest.bandsintown.com/artists/"+searchVariable+ "/events?app_id=codingbootcamp"
       axios.get(queryURL)
         .then(function (response) {
           console.log(hline);
           console.log("Name of Venue: " + response.data[0].venue.name);
           console.log("Venue Location: " + response.data[0].venue.city);
-          console.log("Date odf Event: " + moment(response.data[0].datetime).format("MM-DD-YYYY"));
+          console.log("Date of Event: " + moment(response.data[0].datetime).format("MM-DD-YYYY"));
           console.log(hline);
         
         })
@@ -52,7 +52,7 @@ function spotifyThis(){
     
     if (!searchVariable){searchVariable="the sign ace of base"}
 
-    console.log("This is searchVariable: "+searchVariable);
+    
 
     var spotify = new Spotify({
       id: process.env.SPOTIFY_ID,
@@ -65,12 +65,12 @@ function spotifyThis(){
           if (error){
             return console.log("An error occurred. "+ error);
           }
-          
+          console.log(hline);
           console.log("Artist(s) Name: " + data.tracks.items[0].album.artists[0].name);
           console.log("Song Name: "+ data.tracks.items[0].name);
           console.log("Song Preview Link: "+data.tracks.items[0].href);
           console.log("Album: "+ data.tracks.items[0].album.name);
-          
+          console.log(hline);
         })
         
 }
@@ -112,6 +112,7 @@ function movieThis(){
 }
 
 function doThis() {
+  
  // code block
       // node liri.js do-what-it-says
       // Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
@@ -124,15 +125,17 @@ function doThis() {
         console.log(data);
         var randomData = data.split(",");
          command = randomData[0];
+         searchVariable = randomData[1];
 
-          main(command);
+          main(command,searchVariable);
       })
 }
  
 
 
-function main () {
-  switch(command) {
+function main (commandValue,searchValue) {
+  
+  switch(commandValue) {
       case "concert-this":
         concertThis();
       break;
@@ -155,4 +158,4 @@ function main () {
     }
 }
 
-main();
+main(command);
